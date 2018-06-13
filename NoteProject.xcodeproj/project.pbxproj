@@ -8,24 +8,62 @@
 
 /* Begin PBXBuildFile section */
 		02CDDC4F20CF63FB007F669F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC4E20CF63FB007F669F /* AppDelegate.m */; };
-		02CDDC5220CF63FB007F669F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC5120CF63FB007F669F /* ViewController.m */; };
 		02CDDC5520CF63FB007F669F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02CDDC5320CF63FB007F669F /* Main.storyboard */; };
 		02CDDC5720CF63FD007F669F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02CDDC5620CF63FD007F669F /* Assets.xcassets */; };
 		02CDDC5A20CF63FD007F669F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02CDDC5820CF63FD007F669F /* LaunchScreen.storyboard */; };
 		02CDDC5D20CF63FD007F669F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC5C20CF63FD007F669F /* main.m */; };
+		02CDDC6720CF7A5A007F669F /* MLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC6620CF7A5A007F669F /* MLTabBarController.m */; };
+		02CDDC6A20CF7A95007F669F /* MLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC6920CF7A95007F669F /* MLNavigationController.m */; };
+		02CDDC6E20CF7B2F007F669F /* MLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC6D20CF7B2F007F669F /* MLTabBar.m */; };
+		02CDDC7220CF8DE7007F669F /* UIView+GetFrameProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC7120CF8DE7007F669F /* UIView+GetFrameProperty.m */; };
+		02CDDC7A20CFA8C1007F669F /* MLNoteBookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC7920CFA8C1007F669F /* MLNoteBookListViewController.m */; };
+		02CDDC7D20CFAB54007F669F /* MLNoteBookListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC7C20CFAB54007F669F /* MLNoteBookListCell.m */; };
+		02CDDC8620CFAF67007F669F /* MLNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC8520CFAF67007F669F /* MLNote.m */; };
+		02CDDC8A20CFAFDA007F669F /* MLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC8920CFAFDA007F669F /* MLBaseModel.m */; };
+		02CDDC8C20CFB84B007F669F /* MLNoteBookListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CDDC8B20CFB84B007F669F /* MLNoteBookListCell.xib */; };
+		02CDDC9020CFE9CB007F669F /* NSDate+GetTimeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC8F20CFE9CB007F669F /* NSDate+GetTimeStamp.m */; };
+		02CDDC9620D0ACED007F669F /* MLNoteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC9520D0ACED007F669F /* MLNoteListViewController.m */; };
+		02CDDC9A20D0AEAA007F669F /* MLNoteListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC9820D0AEAA007F669F /* MLNoteListCell.m */; };
+		02CDDC9B20D0AEAA007F669F /* MLNoteListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CDDC9920D0AEAA007F669F /* MLNoteListCell.xib */; };
+		02CDDC9E20D1013A007F669F /* NSDate+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDDC9D20D1013A007F669F /* NSDate+XMGExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		02CDDC4A20CF63FB007F669F /* NoteProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CDDC4D20CF63FB007F669F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		02CDDC4E20CF63FB007F669F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		02CDDC5020CF63FB007F669F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		02CDDC5120CF63FB007F669F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		02CDDC5420CF63FB007F669F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		02CDDC5620CF63FD007F669F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02CDDC5920CF63FD007F669F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02CDDC5B20CF63FD007F669F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02CDDC5C20CF63FD007F669F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		02CDDC6520CF7A5A007F669F /* MLTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLTabBarController.h; sourceTree = "<group>"; };
+		02CDDC6620CF7A5A007F669F /* MLTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLTabBarController.m; sourceTree = "<group>"; };
+		02CDDC6820CF7A95007F669F /* MLNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNavigationController.h; sourceTree = "<group>"; };
+		02CDDC6920CF7A95007F669F /* MLNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNavigationController.m; sourceTree = "<group>"; };
+		02CDDC6C20CF7B2F007F669F /* MLTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLTabBar.h; sourceTree = "<group>"; };
+		02CDDC6D20CF7B2F007F669F /* MLTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLTabBar.m; sourceTree = "<group>"; };
+		02CDDC7020CF8DE6007F669F /* UIView+GetFrameProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GetFrameProperty.h"; sourceTree = "<group>"; };
+		02CDDC7120CF8DE7007F669F /* UIView+GetFrameProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GetFrameProperty.m"; sourceTree = "<group>"; };
+		02CDDC7320CF8E02007F669F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		02CDDC7820CFA8C1007F669F /* MLNoteBookListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNoteBookListViewController.h; sourceTree = "<group>"; };
+		02CDDC7920CFA8C1007F669F /* MLNoteBookListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNoteBookListViewController.m; sourceTree = "<group>"; };
+		02CDDC7B20CFAB54007F669F /* MLNoteBookListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNoteBookListCell.h; sourceTree = "<group>"; };
+		02CDDC7C20CFAB54007F669F /* MLNoteBookListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNoteBookListCell.m; sourceTree = "<group>"; };
+		02CDDC8420CFAF67007F669F /* MLNote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNote.h; sourceTree = "<group>"; };
+		02CDDC8520CFAF67007F669F /* MLNote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNote.m; sourceTree = "<group>"; };
+		02CDDC8820CFAFDA007F669F /* MLBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLBaseModel.h; sourceTree = "<group>"; };
+		02CDDC8920CFAFDA007F669F /* MLBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLBaseModel.m; sourceTree = "<group>"; };
+		02CDDC8B20CFB84B007F669F /* MLNoteBookListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLNoteBookListCell.xib; sourceTree = "<group>"; };
+		02CDDC8E20CFE9CB007F669F /* NSDate+GetTimeStamp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+GetTimeStamp.h"; sourceTree = "<group>"; };
+		02CDDC8F20CFE9CB007F669F /* NSDate+GetTimeStamp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GetTimeStamp.m"; sourceTree = "<group>"; };
+		02CDDC9420D0ACED007F669F /* MLNoteListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNoteListViewController.h; sourceTree = "<group>"; };
+		02CDDC9520D0ACED007F669F /* MLNoteListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNoteListViewController.m; sourceTree = "<group>"; };
+		02CDDC9720D0AEAA007F669F /* MLNoteListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNoteListCell.h; sourceTree = "<group>"; };
+		02CDDC9820D0AEAA007F669F /* MLNoteListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNoteListCell.m; sourceTree = "<group>"; };
+		02CDDC9920D0AEAA007F669F /* MLNoteListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLNoteListCell.xib; sourceTree = "<group>"; };
+		02CDDC9C20D1013A007F669F /* NSDate+XMGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+XMGExtension.h"; sourceTree = "<group>"; };
+		02CDDC9D20D1013A007F669F /* NSDate+XMGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+XMGExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,17 +96,122 @@
 		02CDDC4C20CF63FB007F669F /* NoteProject */ = {
 			isa = PBXGroup;
 			children = (
+				02CDDC7420CFA82E007F669F /* Note */,
+				02CDDC6320CF7992007F669F /* Other */,
+			);
+			path = NoteProject;
+			sourceTree = "<group>";
+		};
+		02CDDC6320CF7992007F669F /* Other */ = {
+			isa = PBXGroup;
+			children = (
 				02CDDC4D20CF63FB007F669F /* AppDelegate.h */,
 				02CDDC4E20CF63FB007F669F /* AppDelegate.m */,
-				02CDDC5020CF63FB007F669F /* ViewController.h */,
-				02CDDC5120CF63FB007F669F /* ViewController.m */,
+				02CDDC7320CF8E02007F669F /* PrefixHeader.pch */,
 				02CDDC5320CF63FB007F669F /* Main.storyboard */,
 				02CDDC5620CF63FD007F669F /* Assets.xcassets */,
 				02CDDC5820CF63FD007F669F /* LaunchScreen.storyboard */,
 				02CDDC5B20CF63FD007F669F /* Info.plist */,
 				02CDDC5C20CF63FD007F669F /* main.m */,
+				02CDDC8D20CFE956007F669F /* Tools */,
+				02CDDC6F20CF8DDB007F669F /* Category */,
+				02CDDC6420CF79C2007F669F /* Controller */,
+				02CDDC6B20CF7B0A007F669F /* View */,
+				02CDDC8720CFAF92007F669F /* Model */,
 			);
-			path = NoteProject;
+			path = Other;
+			sourceTree = "<group>";
+		};
+		02CDDC6420CF79C2007F669F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC6520CF7A5A007F669F /* MLTabBarController.h */,
+				02CDDC6620CF7A5A007F669F /* MLTabBarController.m */,
+				02CDDC6820CF7A95007F669F /* MLNavigationController.h */,
+				02CDDC6920CF7A95007F669F /* MLNavigationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		02CDDC6B20CF7B0A007F669F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC6C20CF7B2F007F669F /* MLTabBar.h */,
+				02CDDC6D20CF7B2F007F669F /* MLTabBar.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		02CDDC6F20CF8DDB007F669F /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC7020CF8DE6007F669F /* UIView+GetFrameProperty.h */,
+				02CDDC7120CF8DE7007F669F /* UIView+GetFrameProperty.m */,
+				02CDDC8E20CFE9CB007F669F /* NSDate+GetTimeStamp.h */,
+				02CDDC8F20CFE9CB007F669F /* NSDate+GetTimeStamp.m */,
+				02CDDC9C20D1013A007F669F /* NSDate+XMGExtension.h */,
+				02CDDC9D20D1013A007F669F /* NSDate+XMGExtension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		02CDDC7420CFA82E007F669F /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC7720CFA86F007F669F /* Controller */,
+				02CDDC7620CFA86F007F669F /* View */,
+				02CDDC7520CFA86F007F669F /* Model */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		02CDDC7520CFA86F007F669F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC8420CFAF67007F669F /* MLNote.h */,
+				02CDDC8520CFAF67007F669F /* MLNote.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		02CDDC7620CFA86F007F669F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC7B20CFAB54007F669F /* MLNoteBookListCell.h */,
+				02CDDC7C20CFAB54007F669F /* MLNoteBookListCell.m */,
+				02CDDC8B20CFB84B007F669F /* MLNoteBookListCell.xib */,
+				02CDDC9720D0AEAA007F669F /* MLNoteListCell.h */,
+				02CDDC9820D0AEAA007F669F /* MLNoteListCell.m */,
+				02CDDC9920D0AEAA007F669F /* MLNoteListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		02CDDC7720CFA86F007F669F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC7820CFA8C1007F669F /* MLNoteBookListViewController.h */,
+				02CDDC7920CFA8C1007F669F /* MLNoteBookListViewController.m */,
+				02CDDC9420D0ACED007F669F /* MLNoteListViewController.h */,
+				02CDDC9520D0ACED007F669F /* MLNoteListViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		02CDDC8720CFAF92007F669F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02CDDC8820CFAFDA007F669F /* MLBaseModel.h */,
+				02CDDC8920CFAFDA007F669F /* MLBaseModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		02CDDC8D20CFE956007F669F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +240,7 @@
 		02CDDC4220CF63FB007F669F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = ML;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = liby;
 				TargetAttributes = {
@@ -130,6 +274,8 @@
 			files = (
 				02CDDC5A20CF63FD007F669F /* LaunchScreen.storyboard in Resources */,
 				02CDDC5720CF63FD007F669F /* Assets.xcassets in Resources */,
+				02CDDC9B20D0AEAA007F669F /* MLNoteListCell.xib in Resources */,
+				02CDDC8C20CFB84B007F669F /* MLNoteBookListCell.xib in Resources */,
 				02CDDC5520CF63FB007F669F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,8 +287,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02CDDC5220CF63FB007F669F /* ViewController.m in Sources */,
+				02CDDC9020CFE9CB007F669F /* NSDate+GetTimeStamp.m in Sources */,
+				02CDDC8A20CFAFDA007F669F /* MLBaseModel.m in Sources */,
+				02CDDC7A20CFA8C1007F669F /* MLNoteBookListViewController.m in Sources */,
+				02CDDC9E20D1013A007F669F /* NSDate+XMGExtension.m in Sources */,
+				02CDDC6E20CF7B2F007F669F /* MLTabBar.m in Sources */,
+				02CDDC8620CFAF67007F669F /* MLNote.m in Sources */,
+				02CDDC6A20CF7A95007F669F /* MLNavigationController.m in Sources */,
+				02CDDC9A20D0AEAA007F669F /* MLNoteListCell.m in Sources */,
+				02CDDC7220CF8DE7007F669F /* UIView+GetFrameProperty.m in Sources */,
+				02CDDC9620D0ACED007F669F /* MLNoteListViewController.m in Sources */,
 				02CDDC5D20CF63FD007F669F /* main.m in Sources */,
+				02CDDC6720CF7A5A007F669F /* MLTabBarController.m in Sources */,
+				02CDDC7D20CFAB54007F669F /* MLNoteBookListCell.m in Sources */,
 				02CDDC4F20CF63FB007F669F /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +442,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KS72P78C72;
-				INFOPLIST_FILE = NoteProject/Info.plist;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/NoteProject/Other/PrefixHeader.pch";
+				INFOPLIST_FILE = NoteProject/Other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -303,7 +462,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KS72P78C72;
-				INFOPLIST_FILE = NoteProject/Info.plist;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/NoteProject/Other/PrefixHeader.pch";
+				INFOPLIST_FILE = NoteProject/Other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

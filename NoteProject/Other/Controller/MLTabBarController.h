@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MLTabBarController.h
 //  NoteProject
 //
 //  Created by liby on 2018/6/12.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MLTabBarController : UITabBarController
 
 @end
-
