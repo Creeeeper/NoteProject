@@ -24,22 +24,7 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
 
 - (NSMutableArray *)noteListArr{
     if (!_noteListArr) {
-        _noteListArr = [NSMutableArray array];
-        MLNoteBook *noteBook = [[MLNoteBook alloc] initWithTitle:@"第一本笔记"];
-        MLNoteBookGroup *noteBookGroup = [[MLNoteBookGroup alloc] initWithTitle:@"第一笔记本组"];
-        MLNoteBook *noteBook1 = [[MLNoteBook alloc] initWithTitle:@"第二本笔记第二本笔记第二本笔记第二本笔记第二本笔记第二本笔记第二本笔记"];
-        MLNoteBook *noteBook2 = [[MLNoteBook alloc] initWithTitle:@"第三本笔记"];
-        MLNote *note1 = [[MLNote alloc] initWithTitle:@"第一笔记"];
-        MLNote *note2 = [[MLNote alloc] initWithTitle:@"第二笔记"];
-        note1.content = @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈";
-        note2.content = @"哈哈哈";
-        [noteBook2 addNote:note1];
-        [noteBook2 addNote:note2];
-        [noteBookGroup addNoteBook:noteBook1];
-        [noteBookGroup addNoteBook:noteBook2];
-        [_noteListArr addObject:noteBook];
-        [_noteListArr addObject:noteBookGroup];
-        [_noteListArr addObject:noteBook];
+        _noteListArr = [[MLNotesManager sharedManager].noteListDict.allValues mutableCopy];
     }
     return _noteListArr;
 }
@@ -97,7 +82,7 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
                 cell.caretDownBtn.transform = CGAffineTransformMakeRotation(180.1 * M_PI/180.0);
             }];
             MLNoteBookGroup *temp = self.noteListArr[indexPath.section];
-            [self.noteListArr insertObject:temp.noteBookArr atIndex:index];
+            [self.noteListArr insertObject:temp.noteBookDict.allValues atIndex:index];
             [self.tableView insertSections:[[NSIndexSet alloc] initWithIndex:index] withRowAnimation:UITableViewRowAnimationBottom];
         } else {
             [UIView animateWithDuration:0.25 animations:^{

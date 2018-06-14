@@ -16,15 +16,33 @@ static NSString *const MLNoteListID = @"MLNoteListCell";
 @property (nonatomic, strong) UITableView *tableView;
 /** 无笔记视图 */
 @property (nonatomic, strong) UIView *emptyView;
+/** 笔记本标识 */
+@property (nonatomic, strong) NSString *noteBookUUID;
 @end
 
 @implementation MLNoteListViewController
 
+- (void)setNoteBook:(MLNoteBook *)noteBook {
+    if (_noteBook != noteBook) {
+        _noteBook = noteBook;
+        self.noteBookUUID = noteBook.UUID;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.noteBook.titleName;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataNotification) name:MLReloadDataNotification object:nil];
+    
     [self setupTableView];
     [self setupEmptyView];
+}
+- (void)reloadDataNotification {
+    __weak MLNoteListViewController *weakSelf = self;
+    [[MLNotesManager sharedManager] getNoteModelWithUUID:self.noteBookUUID complete:^(id model) {
+        weakSelf.noteBook = model;
+        [weakSelf.tableView reloadData];
+    }];
 }
 - (void)setupTableView {
     UITableView *tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWidth, self.view.H) style:(UITableViewStylePlain)];
@@ -67,7 +85,7 @@ static NSString *const MLNoteListID = @"MLNoteListCell";
     [self isShowEmptyView];
 }
 - (void)isShowEmptyView {
-    if (self.noteBook.noteArr.count) {
+    if (self.noteBook.noteDict.count) {
         self.emptyView.hidden = YES;
     } else {
         self.emptyView.hidden = NO;
@@ -76,58 +94,24 @@ static NSString *const MLNoteListID = @"MLNoteListCell";
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MLNoteListCell *cell = [tableView dequeueReusableCellWithIdentifier:MLNoteListID forIndexPath:indexPath];
-    [cell setupUIWithModel:self.noteBook.noteArr[indexPath.row]];
+    [cell setupUIWithModel:self.noteBook.noteDict.allValues[indexPath.row]];
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.noteBook.noteArr.count;
-}
-/*
-- (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
-    <#code#>
+    return self.noteBook.noteDict.count;
 }
 
-- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-    <#code#>
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MLNoteViewController *noteVC = [[MLNoteViewController alloc] init];
+    noteVC.note = self.noteBook.noteDict.allValues[indexPath.row];
+    noteVC.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:noteVC animated:YES];
 }
 
-- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    <#code#>
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-    <#code#>
-}
-
-- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    <#code#>
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    <#code#>
-}
-
-- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    <#code#>
-}
-
-- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
-    <#code#>
-}
-
-- (void)setNeedsFocusUpdate {
-    <#code#>
-}
-
-- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
-    <#code#>
-}
-
-- (void)updateFocusIfNeeded {
-    <#code#>
-}
-*/
 
 @end

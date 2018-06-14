@@ -29,7 +29,9 @@
 /** 父标识 */
 @property (nonatomic, strong) NSString *parentUUID;
 /** 正文 */
-@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong, readonly) NSString *content;
+/** 正文(富文本) */
+@property (nonatomic, strong) NSAttributedString *AttContent;
 /** 图片字典 */
 @property (nonatomic, strong) NSMutableDictionary *picDict;
 
@@ -41,7 +43,9 @@
 /** 父标识 */
 @property (nonatomic, strong) NSString *parentUUID;
 /** 笔记数组 */
-@property (nonatomic, strong) NSMutableArray <MLNote *>*noteArr;
+//@property (nonatomic, strong) NSMutableArray <MLNote *>*noteArr;
+/** 笔记字典 */
+@property (nonatomic, strong) NSMutableDictionary *noteDict;
 
 /** 添加笔记 */
 - (MLNote *)addNote:(MLNote *)model;
@@ -53,7 +57,9 @@
 // 笔记本组
 @interface MLNoteBookGroup : MLBaseNoteModel
 /** 笔记本数组 */
-@property (nonatomic, strong) NSMutableArray <MLNoteBook *>*noteBookArr;
+//@property (nonatomic, strong) NSMutableArray <MLNoteBook *>*noteBookArr;
+/** 笔记本字典 */
+@property (nonatomic, strong) NSMutableDictionary *noteBookDict;
 
 /** 添加笔记本 */
 - (MLNoteBook *)addNoteBook:(MLNoteBook *)model;

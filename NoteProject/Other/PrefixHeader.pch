@@ -9,18 +9,25 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#import "UIView+GetFrameProperty.h"
-#import "NSDate+XMGExtension.h"
+#import "MLMainConst.h"
 #import "MLBaseModel.h"
 #import "MLNote.h"
+#import "UIView+GetFrameProperty.h"
+#import "NSDate+XMGExtension.h"
+#import "MLNoteViewController.h"
+#import <YYText.h>
+#import "MLNotesManager.h"
 
 
 
 
 
 
+//GCD - 在Main线程上运行
+#define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);
 
-
+//GCD - 开启异步线程
+#define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlock);
 // RGB颜色
 #define MLColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 #define MLGrayColor(g) [UIColor colorWithRed:(g)/255.0 green:(g)/255.0 blue:(g)/255.0 alpha:1.0]

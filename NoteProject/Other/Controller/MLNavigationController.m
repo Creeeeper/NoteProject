@@ -42,7 +42,9 @@
         [btn addTarget:self action:@selector(back) forControlEvents:(UIControlEventTouchUpInside)];
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
         //隐藏tabbar
-//        viewController.hidesBottomBarWhenPushed = YES;
+        if ([viewController isKindOfClass:[MLNoteViewController class]]) {
+            viewController.hidesBottomBarWhenPushed = YES;
+        }
     }
     //再调用父类方法,这样可以自己定义左按钮覆盖返回按钮
     [super pushViewController:viewController animated:animated];

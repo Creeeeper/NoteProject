@@ -37,7 +37,7 @@
         self.imgV.image = [UIImage imageNamed:@"Ios_StackIcon_24"];
         
         self.countLab.hidden = NO;
-        self.countLab.text = [NSString stringWithFormat:@"(%ld)", tempModel.noteArr.count];
+        self.countLab.text = [NSString stringWithFormat:@"(%ld)", tempModel.noteDict.count];
         self.caretDownBtn.hidden = YES;
         self.titleLab.text = tempModel.titleName;
     }

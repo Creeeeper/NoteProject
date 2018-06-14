@@ -10,8 +10,8 @@
 
 @interface MLNoteListViewController : UIViewController
 
-/** 笔记数组 */
-//@property (nonatomic, strong) NSMutableArray <MLNote *>*noteArr;
 /** 笔记本 */
 @property (nonatomic, strong) MLNoteBook *noteBook;
+
+
 @end

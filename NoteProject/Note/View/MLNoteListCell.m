@@ -35,7 +35,8 @@
         self.titleToContent.constant = 0;
     }
     if (model.picDict.count) {
-        self.imgViewH.constant = (kWidth - 60) / 3 * 0.645 + 10;
+        self.imgViewH.constant = (kWidth - 60) / 3 * 0.645;
+        self.imgViewBottom.constant = 10;
         switch (model.picDict.count) {
             default:
             case 3: {
@@ -50,6 +51,7 @@
         }
     } else {
         self.imgViewH.constant = 0;
+        self.imgViewBottom.constant = 0;
         self.imgV1.image = nil;
         self.imgV2.image = nil;
         self.imgV3.image = nil;

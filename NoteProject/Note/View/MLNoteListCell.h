@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *imgView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgViewH;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleToContent;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgViewBottom;
 
 - (void)setupUIWithModel:(MLNote *)model;
 
