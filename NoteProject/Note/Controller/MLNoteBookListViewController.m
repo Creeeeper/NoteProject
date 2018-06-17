@@ -220,7 +220,8 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         //重命名
         UITextField *tf = alert.textFields.firstObject;
-        NSString *title = KWhitespaceString(tf.text);
+        NSString *title = [self judgeTitle:tf.text];
+        if (!title) return;
         if (![title isEqualToString:model.titleName]) {
             model.titleName = title;
 //            [self.manager updateNoteModel:model fFloor:self.fFloor sFloor:self.sFloor tFloor:self.tFloor complete:^(BOOL succeed) {
@@ -287,7 +288,8 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
     [alert addAction:cancelAction];
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"创建" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         UITextField *tf = alert.textFields.firstObject;
-        NSString *title = KWhitespaceString(tf.text);
+        NSString *title = [self judgeTitle:tf.text];
+        if (!title) return;
         // 重名判断
         for (MLNoteBaseModel *obj in self.manager.noteListArr) {
             if (obj.modelType == MLModelGroup) {
@@ -320,7 +322,8 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
     [alert addAction:cancelAction];
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"创建" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         UITextField *tf = alert.textFields.firstObject;
-        NSString *title = KWhitespaceString(tf.text);
+        NSString *title = [self judgeTitle:tf.text];
+        if (!title) return;
         // 重名判断
         for (MLNoteBaseModel *obj in self.manager.noteListArr) {
             if (obj.modelType == MLModelGroup) {
@@ -388,6 +391,15 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:alert animated:YES completion:nil];
     });
+}
+#pragma mark - 空标题判断
+- (NSString *)judgeTitle:(NSString *)title {
+    title = KWhitespaceString(title);
+    if (!title.length) {
+        [SVProgressHUD showErrorWithStatus:@"标题不能为空"];
+        return nil;
+    }
+    return title;
 }
 - (void)dealloc {
 }

@@ -51,6 +51,17 @@
 }
 
 - (void)clickRightItem {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    UIAlertAction *renameAction = [UIAlertAction actionWithTitle:@"恢复笔记" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self regainNote];
+    }];
+    [alert addAction:renameAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+- (void)regainNote {
     BOOL succe = [self.manager canRegainNoteToNoteBook:self.note];
     if (succe) {
         [SVProgressHUD showSuccessWithStatus:@"恢复笔记成功"];
@@ -58,7 +69,7 @@
         MLNoteBookListViewController *nblVC = [[MLNoteBookListViewController alloc] init];
         nblVC.listType = MLNoteBookListChoose;
         nblVC.regainNote = self.note;
-        nblVC.title = @"恢复至...";
+        nblVC.title = @"移动至...";
         MLNavigationController *nvc = [[MLNavigationController alloc] initWithRootViewController:nblVC];
         [nvc setModalPresentationStyle:UIModalPresentationCurrentContext];
         [self presentViewController:nvc animated:YES completion:^{
