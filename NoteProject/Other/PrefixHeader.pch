@@ -16,13 +16,15 @@
 #import "NSDate+XMGExtension.h"
 #import "MLNoteViewController.h"
 #import <YYText.h>
+#import "MLViewController.h"
 #import "MLNotesManager.h"
+#import <SVProgressHUD.h>
 
 
 
 
-
-
+// 除空格
+#define KWhitespaceString(string) [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
 //GCD - 在Main线程上运行
 #define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);
 

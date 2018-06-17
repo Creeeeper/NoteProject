@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.interactivePopGestureRecognizer.delegate = nil;
 }
 //可以再这个方法中拦截所有push进来的控制器
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -38,6 +39,7 @@
         UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [btn setImage:[UIImage imageNamed:@"Back Chevron"] forState:(UIControlStateNormal)];
         [btn sizeToFit];
+        btn.W = btn.W + 15;
         btn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         [btn addTarget:self action:@selector(back) forControlEvents:(UIControlEventTouchUpInside)];
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
@@ -46,12 +48,12 @@
             viewController.hidesBottomBarWhenPushed = YES;
         }
     }
-    //再调用父类方法,这样可以自己定义左按钮覆盖返回按钮
     [super pushViewController:viewController animated:animated];
 }
 - (void)back{
     [self popViewControllerAnimated:YES];
 }
+
 
 
 

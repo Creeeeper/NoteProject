@@ -16,31 +16,30 @@ static NSString *const MLNoteListID = @"MLNoteListCell";
 @property (nonatomic, strong) UITableView *tableView;
 /** 无笔记视图 */
 @property (nonatomic, strong) UIView *emptyView;
-/** 笔记本标识 */
-@property (nonatomic, strong) NSString *noteBookUUID;
 @end
 
 @implementation MLNoteListViewController
 
-- (void)setNoteBook:(MLNoteBook *)noteBook {
-    if (_noteBook != noteBook) {
-        _noteBook = noteBook;
-        self.noteBookUUID = noteBook.UUID;
-    }
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self isShowEmptyView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.noteBook.titleName;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataNotification) name:MLReloadDataNotification object:nil];
-    
     [self setupTableView];
     [self setupEmptyView];
 }
 - (void)reloadDataNotification {
     __weak MLNoteListViewController *weakSelf = self;
-    [[MLNotesManager sharedManager] getNoteModelWithUUID:self.noteBookUUID complete:^(id model) {
+    [self.manager getNoteModelWithfFloor:self.fFloor sFloor:self.sFloor tFloor:self.tFloor complete:^(id model) {
         weakSelf.noteBook = model;
+        [weakSelf isShowEmptyView];
         [weakSelf.tableView reloadData];
     }];
 }
@@ -85,33 +84,63 @@ static NSString *const MLNoteListID = @"MLNoteListCell";
     [self isShowEmptyView];
 }
 - (void)isShowEmptyView {
-    if (self.noteBook.noteDict.count) {
+    if (self.noteBook.noteArr.count) {
         self.emptyView.hidden = YES;
     } else {
         self.emptyView.hidden = NO;
     }
+    [self.tableView reloadData];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MLNoteListCell *cell = [tableView dequeueReusableCellWithIdentifier:MLNoteListID forIndexPath:indexPath];
-    [cell setupUIWithModel:self.noteBook.noteDict.allValues[indexPath.row]];
-    
+    cell.model = self.noteBook.noteArr[indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.noteBook.noteDict.count;
+    return self.noteBook.noteArr.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    self.manager.tFloor = @(indexPath.row);
+    MLNoteListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     MLNoteViewController *noteVC = [[MLNoteViewController alloc] init];
-    noteVC.note = self.noteBook.noteDict.allValues[indexPath.row];
+    noteVC.note = cell.model;
+    noteVC.fFloor = self.fFloor;
+    noteVC.sFloor = self.sFloor;
+    noteVC.tFloor = @(indexPath.row);
+    noteVC.bookType = self.noteBook.bookType;
     noteVC.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:noteVC animated:YES];
 }
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+#pragma mark - 编辑
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.noteBook.bookType == MLBookDele) {
+        return NO;
+    }
+    return YES;
+}
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak MLNoteListViewController *weakSelf = self;
+    UITableViewRowAction *editRowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal) title:nil handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        MLNoteListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [self.manager moveToWasteNote:cell.model fFloor:self.fFloor sFloor:self.sFloor tFloor:@(indexPath.row) complete:^(BOOL succeed) {
+            if (succeed) {
+                [SVProgressHUD showSuccessWithStatus:@"已移到废纸篓"];
+                [weakSelf isShowEmptyView];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"操作失败"];
+            }
+        }];
+    }];
+    editRowAction.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"SwipeToDelete"]];
+    return @[editRowAction];
 }
 
+- (void)dealloc {
+    self.manager.fFloor = nil;
+    self.manager.sFloor = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

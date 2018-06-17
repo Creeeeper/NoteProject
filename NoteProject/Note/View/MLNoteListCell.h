@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleToContent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgViewBottom;
 
-- (void)setupUIWithModel:(MLNote *)model;
+@property (nonatomic, strong) MLNote *model;
+
 
 @end

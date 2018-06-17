@@ -9,7 +9,7 @@
 #import "MLNote.h"
 
 
-@implementation MLBaseNoteModel
+@implementation MLNoteBaseModel
 {
     NSString *_UUID;
     NSDate *_date;
@@ -48,68 +48,68 @@
     return _AttContent.string;
 }
 
+- (MLModelType)modelType {
+    return MLModelNote;
+}
+
 @end
 
 
 @implementation MLNoteBook
-//- (NSMutableArray <MLNote *>*)noteArr{
-//    if (!_noteArr) {
-//        _noteArr = [NSMutableArray array];
-//    }
-//    return _noteArr;
-//}
-- (NSMutableDictionary *)noteDict {
-    if (!_noteDict) {
-        _noteDict = [NSMutableDictionary dictionary];
-//        for (MLNote *model in self.noteArr) {
-//            [_noteDict setObject:model forKey:model.UUID];
-//        }
+- (NSMutableArray *)noteArr{
+    if (!_noteArr) {
+        _noteArr = [NSMutableArray array];
     }
-    return _noteDict;
+    return _noteArr;
+}
+- (MLModelType)modelType {
+    return MLModelBook;
+}
+- (BOOL)isContainNote {
+    return self.noteArr.count;
 }
 - (MLNote *)addNote:(MLNote *)model {
-    model.parentUUID = self.UUID;
-    [self.noteDict setObject:model forKey:model.UUID];
-//    [self.noteArr addObject:model];
+//    model.parentUUID = self.UUID;
+//    [self.noteArr addNoteModel:model];
+    [self.noteArr addObject:model];
     return model;
 }
-- (MLNote *)removeNote:(MLNote *)model {
-    [self.noteDict setObject:model forKey:model.UUID];
-//    [self.noteArr removeObject:model];
-    model.parentUUID = nil;
-    return model;
+- (void)deleteNote:(MLNote *)model {
+//    NSArray *arr = self.noteArr;
+//    for (NSDictionary *dic in arr) {
+//        if ([dic.allKeys.firstObject isEqualToString:model.UUID]) {
+//            [self.noteArr removeObject:dic];
+//        }
+//    }
+    
 }
 @end
 
 
 @implementation MLNoteBookGroup
-//- (NSMutableArray <MLNoteBook *>*)noteBookArr{
-//    if (!_noteBookArr) {
-//        _noteBookArr = [NSMutableArray array];
-//    }
-//    return _noteBookArr;
-//}
-- (NSMutableDictionary *)noteBookDict {
-    if (!_noteBookDict) {
-        _noteBookDict = [NSMutableDictionary dictionary];
-//        for (MLNoteBook *model in self.noteBookArr) {
-//            [_noteBookDict setObject:model forKey:model.UUID];
-//        }
+- (NSMutableArray *)noteBookArr{
+    if (!_noteBookArr) {
+        _noteBookArr = [NSMutableArray array];
     }
-    return _noteBookDict;
+    return _noteBookArr;
+}
+- (MLModelType)modelType {
+    return MLModelGroup;
 }
 - (MLNoteBook *)addNoteBook:(MLNoteBook *)model {
-    model.parentUUID = self.UUID;
-//    [self.noteBookArr addObject:model];
-    [self.noteBookDict setObject:model forKey:model.UUID];
+//    model.parentUUID = self.UUID;
+//    [self.noteBookArr addNoteModel:model];
+    [self.noteBookArr addObject:model];
     return model;
     
 }
-- (MLNoteBook *)removeNoteBook:(MLNoteBook *)model {
-//    [self.noteBookArr removeObject:model];
-    [self.noteBookDict setObject:model forKey:model.UUID];
-    model.parentUUID = nil;
-    return model;
+- (void)deleteNoteBook:(MLNoteBook *)model {
+//    NSArray *arr = self.noteBookArr;
+//    for (NSDictionary *dic in arr) {
+//        if ([dic.allKeys.firstObject isEqualToString:model.UUID]) {
+//            [self.noteBookArr removeObject:dic];
+//        }
+//    }
 }
 @end
 

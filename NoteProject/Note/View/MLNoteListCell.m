@@ -22,7 +22,9 @@
     // Configure the view for the selected state
 }
 
-- (void)setupUIWithModel:(MLNote *)model {
+- (void)setModel:(MLNote *)model {
+    _model = model;
+    
     // 必有
     self.titleLab.text = model.titleName;
     self.dateLab.text = model.createTime;
@@ -57,5 +59,6 @@
         self.imgV3.image = nil;
     }
 }
+
 
 @end

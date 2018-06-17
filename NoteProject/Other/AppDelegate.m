@@ -24,6 +24,9 @@
     [self.window makeKeyAndVisible];
     MLTabBarController *tabBarController = [[MLTabBarController alloc] init];
     self.window.rootViewController = tabBarController;
+    
+    [SVProgressHUD setMinimumDismissTimeInterval:2];
+    
     return YES;
 }
 

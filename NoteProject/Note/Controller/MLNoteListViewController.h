@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MLNoteListViewController : UIViewController
+@interface MLNoteListViewController : MLViewController
 
 /** 笔记本 */
 @property (nonatomic, strong) MLNoteBook *noteBook;

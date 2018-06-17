@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MLNoteBookListViewController : UIViewController
+typedef enum : NSUInteger {
+    MLNoteBookListNormal,
+    MLNoteBookListChoose,
+} MLNoteBookListType;
+
+@interface MLNoteBookListViewController : MLViewController
+
+@property (nonatomic, assign) MLNoteBookListType listType;
+
+@property (nonatomic, strong) MLNote *regainNote;
 
 @end

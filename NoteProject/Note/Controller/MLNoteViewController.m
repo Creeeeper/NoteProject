@@ -7,6 +7,8 @@
 //
 
 #import "MLNoteViewController.h"
+#import "MLNoteBookListViewController.h"
+#import "MLNavigationController.h"
 
 @interface MLNoteViewController () <YYTextViewDelegate>
 @property (nonatomic, strong) YYTextView *textView;
@@ -15,24 +17,54 @@
 
 @implementation MLNoteViewController
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.textView resignFirstResponder];
+    if (self.bookType == MLBookNormal) {
+        self.note.AttContent = self.textView.attributedText;
+        self.note.titleName = self.navigationItem.title;
+//        [self.manager updateNoteModel:self.note fFloor:self.fFloor sFloor:self.sFloor tFloor:self.tFloor complete:^(BOOL succeed) {
+//            if (succeed) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:MLReloadDataNotification object:nil];
+//            }
+//        }];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self.navigationController setDefinesPresentationContext:YES];
     self.navigationItem.title = self.note.titleName;
-    
     [self setupTextView];
+    if (self.bookType == MLBookDele) {
+        [self setupNavigationItem];
+    }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.note.AttContent = self.textView.attributedText;
-    //    self.note.titleName = self.navigationItem.title;
-    [[MLNotesManager sharedManager] updateNote:self.note complete:^(BOOL succeed) {
-        if (succeed) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:MLReloadDataNotification object:nil];
-        }
-    }];
+- (void)setupNavigationItem {
+    UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [btn setImage:[UIImage imageNamed:@"iosActionOverflow24"] forState:(UIControlStateNormal)];
+    [btn sizeToFit];
+    [btn addTarget:self action:@selector(clickRightItem) forControlEvents:(UIControlEventTouchUpInside)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+}
+
+- (void)clickRightItem {
+    BOOL succe = [self.manager canRegainNoteToNoteBook:self.note];
+    if (succe) {
+        [SVProgressHUD showSuccessWithStatus:@"恢复笔记成功"];
+    } else {
+        MLNoteBookListViewController *nblVC = [[MLNoteBookListViewController alloc] init];
+        nblVC.listType = MLNoteBookListChoose;
+        nblVC.regainNote = self.note;
+        nblVC.title = @"恢复至...";
+        MLNavigationController *nvc = [[MLNavigationController alloc] initWithRootViewController:nblVC];
+        [nvc setModalPresentationStyle:UIModalPresentationCurrentContext];
+        [self presentViewController:nvc animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)setupTextView {
@@ -43,8 +75,16 @@
     textView.delegate = self;
     textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     textView.placeholderText = @"请输入";
+    textView.selectedRange = NSMakeRange(self.note.AttContent.length, 0);
     [self.view addSubview:textView];
     self.textView = textView;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [textView becomeFirstResponder];
+    });
+}
+- (void)dealloc {
+    self.manager.tFloor = nil;
 }
 
 

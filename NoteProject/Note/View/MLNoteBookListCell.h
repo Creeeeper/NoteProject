@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *countLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftConstraint;
 
-- (void)setupUIWithModel:(MLBaseNoteModel *)model;
+@property (nonatomic, strong) MLNoteBaseModel *model;
+
+@property (nonatomic, assign) BOOL isInGroup;
 
 @end
