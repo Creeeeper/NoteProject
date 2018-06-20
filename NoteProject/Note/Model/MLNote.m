@@ -69,8 +69,7 @@
     return self.noteArr.count;
 }
 - (MLNote *)addNote:(MLNote *)model {
-//    model.parentUUID = self.UUID;
-//    [self.noteArr addNoteModel:model];
+    model.parentUUID = self.UUID;
     [self.noteArr addObject:model];
     return model;
 }
@@ -97,7 +96,7 @@
     return MLModelGroup;
 }
 - (MLNoteBook *)addNoteBook:(MLNoteBook *)model {
-//    model.parentUUID = self.UUID;
+    model.parentUUID = self.UUID;
 //    [self.noteBookArr addNoteModel:model];
     [self.noteBookArr addObject:model];
     return model;

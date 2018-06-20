@@ -31,8 +31,8 @@ SingletonM(InfoManager)
         [noteBook.noteArr addObject:note];
         [noteBook2.noteArr addObject:note1];
         [noteBook2.noteArr addObject:note2];
-        [noteBookGroup.noteBookArr addObject:noteBook1];
         [noteBookGroup.noteBookArr addObject:noteBook2];
+        [noteBookGroup.noteBookArr addObject:noteBook1];
         [noteBookGroup1.noteBookArr addObject:noteBook4];
         [noteBookGroup1.noteBookArr addObject:noteBook5];
         [_noteListArr addObject:noteBook];

@@ -37,9 +37,8 @@
     [self.navigationController setDefinesPresentationContext:YES];
     self.navigationItem.title = self.note.titleName;
     [self setupTextView];
-    if (self.bookType == MLBookDele) {
-        [self setupNavigationItem];
-    }
+    [self setupNavigationItem];
+    
 }
 
 - (void)setupNavigationItem {
@@ -55,29 +54,56 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     [alert addAction:cancelAction];
-    UIAlertAction *renameAction = [UIAlertAction actionWithTitle:@"恢复笔记" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self regainNote];
-    }];
-    [alert addAction:renameAction];
+    if (self.bookType == MLBookDele) {
+        UIAlertAction *renameAction = [UIAlertAction actionWithTitle:@"恢复笔记" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            [self regainNote];
+        }];
+        [alert addAction:renameAction];
+    } else {
+        UIAlertAction *moveAction = [UIAlertAction actionWithTitle:@"移动笔记" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            [self moveNoteToOtherBook:MLNoteBookListChooseFromNormal];
+        }];
+        [alert addAction:moveAction];
+        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"移到废纸篓" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+            [self deleteNote];
+        }];
+        [alert addAction:deleteAction];
+    }
     [self presentViewController:alert animated:YES completion:nil];
 }
 - (void)regainNote {
     BOOL succe = [self.manager canRegainNoteToNoteBook:self.note];
     if (succe) {
         [SVProgressHUD showSuccessWithStatus:@"恢复笔记成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     } else {
-        MLNoteBookListViewController *nblVC = [[MLNoteBookListViewController alloc] init];
-        nblVC.listType = MLNoteBookListChoose;
-        nblVC.regainNote = self.note;
-        nblVC.title = @"移动至...";
-        MLNavigationController *nvc = [[MLNavigationController alloc] initWithRootViewController:nblVC];
-        [nvc setModalPresentationStyle:UIModalPresentationCurrentContext];
-        [self presentViewController:nvc animated:YES completion:^{
-            
-        }];
+        [self moveNoteToOtherBook:MLNoteBookListChooseFromDelete];
     }
 }
-
+- (void)moveNoteToOtherBook:(MLNoteBookListType) type {
+    
+    MLNoteBookListViewController *nblVC = [[MLNoteBookListViewController alloc] init];
+    nblVC.listType = type;
+    nblVC.note = self.note;
+    nblVC.tFloor = self.tFloor;
+    nblVC.title = @"移动至...";
+    if (self.bookType == MLBookNormal) {
+        nblVC.selectIndexPath = [NSIndexPath indexPathForRow:(self.sFloor ? self.sFloor.integerValue + 1 : 0) inSection:self.fFloor.integerValue];
+    }
+    MLNavigationController *nvc = [[MLNavigationController alloc] initWithRootViewController:nblVC];
+    [nvc setModalPresentationStyle:UIModalPresentationCurrentContext];
+    [self presentViewController:nvc animated:YES completion:nil];
+}
+- (void)deleteNote {
+    [self.manager moveToWasteNote:self.note fFloor:self.fFloor sFloor:self.sFloor tFloor:self.tFloor complete:^(BOOL succeed) {
+        if (succeed) {
+            [SVProgressHUD showSuccessWithStatus:@"已移到废纸篓"];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"操作失败"];
+        }
+    }];
+}
 - (void)setupTextView {
     YYTextView *textView = [YYTextView new];
     textView.attributedText = self.note.AttContent;

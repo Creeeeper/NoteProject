@@ -36,7 +36,7 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
     
     [self setupTableView];
     
-    if (self.listType == MLNoteBookListChoose) {
+    if (self.listType != MLNoteBookListNormal) {
         [self setupNavigationItem];
     }
 }
@@ -104,6 +104,9 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
     } else {
         cell.model = self.manager.noteListArr[indexPath.section];
     }
+    if ([indexPath isEqual:self.selectIndexPath]) {
+        cell.imgV.image = [UIImage imageNamed:@"reminder_set"];
+    }
     cell.isInGroup = indexPath.row;
     return cell;
 }
@@ -124,8 +127,13 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
             noteListVC.fFloor = self.fFloor;
             noteListVC.sFloor = self.sFloor;
             [self.navigationController pushViewController:noteListVC animated:YES];
-        } else if (self.listType == MLNoteBookListChoose) {
+        } else if (self.listType == MLNoteBookListChooseFromDelete) {
             [self regainNoteAlert:cell.model];
+        } else if (self.listType == MLNoteBookListChooseFromNormal) {
+            if ([indexPath isEqual:self.selectIndexPath]) {
+                return;
+            }
+            [self moveNoteAlert:cell.model];
         }
     } else {                                // 笔记本组
         NSInteger count = ((MLNoteBookGroup *)cell.model).noteBookArr.count;
@@ -162,7 +170,7 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
 }
 #pragma mark - 编辑
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.listType == MLNoteBookListChoose) {
+    if (self.listType != MLNoteBookListNormal) {
         return NO;
     }
     if (self.manager.deleNoteBook.isContainNote && indexPath.section == self.manager.noteListArr.count) {
@@ -374,8 +382,8 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
     }];
     [alert addAction:cancelAction];
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self.manager.deleNoteBook.noteArr removeObject:self.regainNote];
-        [self.manager insertNoteModel:self.regainNote fFloor:self.fFloor sFloor:self.sFloor complete:^(BOOL succeed) {
+        [self.manager.deleNoteBook.noteArr removeObject:self.note];
+        [self.manager insertNoteModel:self.note fFloor:self.fFloor sFloor:self.sFloor complete:^(BOOL succeed) {
             if (succeed) {
                 [SVProgressHUD showSuccessWithStatus:@"恢复笔记成功"];
             }
@@ -386,6 +394,30 @@ static NSString *const MLNoteBookListID = @"MLNoteBookListCell";
                 }
             }];
         }];
+    }];
+    [alert addAction:okAction];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+}
+#pragma mark - 移动笔记Alert
+- (void)moveNoteAlert:(MLNoteBaseModel *)model {
+    __weak MLNoteBookListViewController *weakSelf = self;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"移动笔记至:" message:model.titleName preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self.manager deleteNoteModel:self.note fFloor:@(self.selectIndexPath.section) sFloor:(self.selectIndexPath.row == 0 ? nil : @(self.selectIndexPath.row - 1)) tFloor:self.tFloor complete:^(BOOL succeed) {
+            if (succeed) {
+                [weakSelf.manager insertNoteModel:weakSelf.note fFloor:weakSelf.fFloor sFloor:weakSelf.sFloor complete:^(BOOL succeed) {
+                    if (succeed) {
+                        [SVProgressHUD showSuccessWithStatus:@"移动笔记成功"];
+                    }
+                }];
+            }
+        }];
+        [weakSelf.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }];
     [alert addAction:okAction];
     dispatch_async(dispatch_get_main_queue(), ^{

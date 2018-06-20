@@ -10,13 +10,27 @@
 
 typedef enum : NSUInteger {
     MLNoteBookListNormal,
-    MLNoteBookListChoose,
+    MLNoteBookListChooseFromDelete,
+    MLNoteBookListChooseFromNormal
 } MLNoteBookListType;
 
 @interface MLNoteBookListViewController : MLViewController
 
+/**
+ 列表类型
+ */
 @property (nonatomic, assign) MLNoteBookListType listType;
 
-@property (nonatomic, strong) MLNote *regainNote;
+/**
+ MLNoteBookListChooseFromDelete | MLNoteBookListChooseFromNormal
+ 持有的笔记
+ */
+@property (nonatomic, strong) MLNote *note;
+
+/**
+ MLNoteBookListChooseFromNormal
+ 笔记原属笔记本的index
+ */
+@property (nonatomic, strong) NSIndexPath *selectIndexPath;
 
 @end
